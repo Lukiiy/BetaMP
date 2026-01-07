@@ -2,14 +2,15 @@ package me.lukiiy.betaMP;
 
 import me.lukiiy.betaMP.commands.Bed;
 import me.lukiiy.betaMP.commands.Spawn;
+import org.bukkit.Bukkit;
+import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.event.Event;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.config.Configuration;
 
 public class BetaMP extends JavaPlugin {
     private static BetaMP instance;
 
-    public Configuration config;
     public ExtraData locations;
 
     @Override
@@ -18,14 +19,20 @@ public class BetaMP extends JavaPlugin {
         locations = new ExtraData("locations");
         setupConfig();
 
+        PluginManager pm = getServer().getPluginManager();
         PlayerEcho pEcho = new PlayerEcho();
         EntityEcho eEcho = new EntityEcho();
 
-        getServer().getPluginManager().registerEvent(Event.Type.PLAYER_JOIN, pEcho, Event.Priority.Normal, this);
-        getServer().getPluginManager().registerEvent(Event.Type.ENTITY_DEATH, eEcho, Event.Priority.Normal, this);
+        pm.registerEvent(Event.Type.PLAYER_JOIN, pEcho, Event.Priority.Normal, this);
+        pm.registerEvent(Event.Type.ENTITY_DEATH, eEcho, Event.Priority.Normal, this);
+        pm.registerEvent(Event.Type.PLAYER_CHAT, pEcho, Event.Priority.Normal, this);
+        pm.registerEvent(Event.Type.PLAYER_BED_ENTER, pEcho, Event.Priority.Normal, this);
 
         getCommand("spawn").setExecutor(new Spawn());
         getCommand("bed").setExecutor(new Bed());
+
+        int difficulty = getConfiguration().getInt("difficulty", -1);
+        if (difficulty > 0 && difficulty < 4) Bukkit.getServer().getWorlds().forEach(w -> ((CraftWorld) w).getHandle().spawnMonsters = difficulty);
     }
 
     @Override
@@ -37,12 +44,13 @@ public class BetaMP extends JavaPlugin {
 
     // Config
     public void setupConfig() {
-        config = getConfiguration();
-        config.load();
+        getConfiguration().load();
 
-        config.getString("welcome", "§f\n§fWelcome to §aBetaMP§f!\n§eOnline players (§f%o§e): §f%ps\n");
-        config.getString("deathMsg", "§cYou died at §6%x %y %z");
+        getConfiguration().getString("welcome", "§f\n§fWelcome to §aBetaMP§f!\n§eOnline players (§f%o§e): §f%ps\n");
+        getConfiguration().getString("deathMsg", "§cYou died at §6%x %y %z");
+        getConfiguration().getBoolean("cheatyBack", false);
+        getConfiguration().getInt("difficulty", -1);
 
-        config.save();
+        getConfiguration().save();
     }
 }

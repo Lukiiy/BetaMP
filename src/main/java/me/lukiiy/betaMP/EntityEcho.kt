@@ -11,7 +11,7 @@ class EntityEcho : EntityListener() {
         val p = e.entity as Player
         val loc = p.location
 
-        val deathMsg = BetaMP.getInstance().config.getString("deathMsg", "").replace('&', '§').replace("%x", "${loc.blockX}").replace("%y", "${loc.blockY}").replace("%z", "${loc.blockZ}")
+        val deathMsg = BetaMP.getInstance().configuration.getString("deathMsg", "").replace('&', '§').replace("%x", "${loc.blockX}").replace("%y", "${loc.blockY}").replace("%z", "${loc.blockZ}")
         if (deathMsg.isBlank()) p.sendMessage(deathMsg)
 
         BetaMP.getInstance().locations.set("death.${p.uniqueId}", loc.serialize())

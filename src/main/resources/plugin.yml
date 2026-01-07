@@ -1,7 +1,6 @@
 name: BetaMP
 version: '1.0-SNAPSHOT'
 main: me.lukiiy.betaMP.BetaMP
-load: STARTUP
 authors: [ Lukiiy ]
 description: A small CB1060 plugin for Minecraft b1.7.3 that is intended for use on SMPs.
 commands:
