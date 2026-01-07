@@ -1,6 +1,7 @@
 package me.lukiiy.betaMP;
 
 import me.lukiiy.betaMP.commands.Bed;
+import me.lukiiy.betaMP.commands.Boop;
 import me.lukiiy.betaMP.commands.Spawn;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.CraftWorld;
@@ -30,6 +31,7 @@ public class BetaMP extends JavaPlugin {
 
         getCommand("spawn").setExecutor(new Spawn());
         getCommand("bed").setExecutor(new Bed());
+        getCommand("boop").setExecutor(new Boop());
 
         int difficulty = getConfiguration().getInt("difficulty", -1);
         if (difficulty > 0 && difficulty < 4) Bukkit.getServer().getWorlds().forEach(w -> ((CraftWorld) w).getHandle().spawnMonsters = difficulty);
