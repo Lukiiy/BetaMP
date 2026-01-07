@@ -13,3 +13,6 @@ commands:
   boop:
     usage: "/<command> [player]"
     description: Boop players
+  back:
+    usage: "/<command> [player]"
+    description: Tells the player's death point (and maybe teleport them)
