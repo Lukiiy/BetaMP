@@ -11,5 +11,5 @@ commands:
     usage: "/<command>"
     description: Tells the player's bed spawn (if set)
   boop:
-    usage: "/<command> <player>"
-    description:
+    usage: "/<command> [player]"
+    description: Boop players
