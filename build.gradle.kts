@@ -5,14 +5,14 @@ plugins {
 }
 
 group = "me.lukiiy"
-version = "1.0-SNAPSHOT"
+version = "1.1"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation(files("lib/cb1060.jar"))
+    compileOnly(files("lib/cb1060.jar"))
     implementation(kotlin("stdlib-jdk8"))
 }
 
@@ -40,4 +40,15 @@ tasks {
     }
 }
 
-kotlin.jvmToolchain(8)
+val targetJava = 8
+
+java {
+    val javaVersion = JavaVersion.toVersion(targetJava)
+
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+
+    if (JavaVersion.current() < javaVersion) toolchain.languageVersion.set(JavaLanguageVersion.of(targetJava))
+}
+
+kotlin.jvmToolchain(targetJava)
