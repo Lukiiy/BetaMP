@@ -23,6 +23,10 @@ class PlayerEcho : PlayerListener() {
     }
 
     override fun onPlayerBedEnter(e: PlayerBedEnterEvent) {
-        Bukkit.getServer().broadcastMessage("${e.player.displayName} is sleeping in a bed. To skip to dawn, all players need to sleep in beds at the same time.")
+        val msg = BetaMP.getInstance().configuration.getString("bedMsg", "").replace("%p", e.player.displayName)
+        if (msg.isBlank()) return
+
+
+        Bukkit.getServer().broadcastMessage(msg)
     }
 }
