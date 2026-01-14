@@ -46,7 +46,7 @@ public class Back implements CommandExecutor {
         if (loc == null) return true;
 
         if (BetaMP.getInstance().getConfiguration().getBoolean("cheatyBack", false)) { // cheat
-            if (strings.length > 0) {
+            if (commandSender.hasPermission("betamp.backtp") && strings.length > 0) {
                 Player target = Bukkit.getServer().getPlayer(strings[0]);
 
                 if (target == null) {
