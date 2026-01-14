@@ -16,7 +16,7 @@ public class Back implements CommandExecutor {
             if (strings.length > 0) {
                 Player p = Bukkit.getServer().getPlayer(strings[0]);
                 if (p == null) {
-                    commandSender.sendMessage("Player not found!");
+                    commandSender.sendMessage("No player was found");
                     return true;
                 }
 
@@ -46,6 +46,18 @@ public class Back implements CommandExecutor {
         if (loc == null) return true;
 
         if (BetaMP.getInstance().getConfiguration().getBoolean("cheatyBack", false)) { // cheat
+            if (strings.length > 0) {
+                Player target = Bukkit.getServer().getPlayer(strings[0]);
+
+                if (target == null) {
+                    commandSender.sendMessage("§cNo player was found");
+                    return true;
+                }
+
+                p.sendMessage("§aTeleported §f" + target.getDisplayName() + " §ato their death point.");
+                return true;
+            }
+
             p.sendMessage("§aTeleported to your last recorded death point!");
             p.teleport(loc);
         } else p.sendMessage("§fYour death point is located at §c" + loc.getBlockX() + " " + loc.getBlockY() + " " + loc.getBlockZ());

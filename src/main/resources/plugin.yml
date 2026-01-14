@@ -16,3 +16,4 @@ commands:
   back:
     usage: "/<command> [player]"
     description: Tells the player's death point (and maybe teleport them)
+    aliases: [ "return" ]
