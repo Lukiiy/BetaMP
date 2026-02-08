@@ -26,7 +26,6 @@ class PlayerEcho : PlayerListener() {
         val msg = BetaMP.getInstance().configuration.getString("bedMsg", "").replace("%p", e.player.displayName)
         if (msg.isBlank()) return
 
-
         Bukkit.getServer().broadcastMessage(msg)
     }
 }
