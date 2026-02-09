@@ -54,7 +54,8 @@ public class BetaMP extends JavaPlugin {
         getConfiguration().getString("deathMsg", "§cYou died at §6%x %y %z");
         getConfiguration().getBoolean("cheatyBack", false);
         getConfiguration().getInt("difficulty", -1);
-        getConfiguration().getString("bedMsg", "%p is sleeping in a bed. To skip to dawn, all players need to sleep in beds at the same time.");
+        getConfiguration().getString("bedMsg", "%p is sleeping in a bed. %r more players must sleep to skip to dawn.");
+        getConfiguration().getString("bedMsgFull", "%p is sleeping in a bed. Skipping to dawn...");
 
         getConfiguration().save();
     }
